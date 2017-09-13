@@ -1,0 +1,101 @@
+定义变量：
+var a int = 10
+
+var a int
+a = 10 //报错
+
+const c int = 5
+
+const (
+	c1 = 6
+	c2 = 7
+)
+
+局部变量：
+a := 10
+
+定义数组：
+var arr [5]int //[5]int是go中的类型
+var arr = [5]int{1,2,3,4,5}
+arr := [5]int{1,2,3,4,5}
+
+go定义变量的规则:
+var 名字 类型 = 值
+var 名字 = 类型值
+eg：
+var a = int(10)  //int可以省略 ， int是类型
+var a = [5]int{1,2,3,4,5}	//[5]int是go中的类型
+名字 := 值
+
+自己的理解：
+[5]int{1,2,3,4,5}	//这个整体叫做1,2,3,4,5的int型数组
+把它赋值给arr，所以arr就是个int数组
+
+slice（切片）
+s1 := []int{1,2,3,4} 
+s := s1[1,2]	//从1开始，到2结束(不包括2)
+
+对于 slice 有几个有用的内置函数：
+len 获取 slice 的长度
+cap 获取 slice 的最大容量
+append 向 slice 里面追加一个或者多个元素，然后返回一个和 slice 一样类型的 slice
+copy 函数 copy 从源 slice 的 src 中复制元素到目标 dst ，并且返回复制的元素的个数
+
+
+map
+定义
+var m1 map[string]int
+m1 = make(map[string]int)
+m1["first"] = 1
+或者
+m1 := make(map[string]int)
+m1["first"] = 1
+上两种需要make
+这种不需要
+rating := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
+
+
+counts := make(map[string]int)
+
+for line, n := range counts {	//返回map的key、value
+	fmt.Printf("[%d]:%s\n", n, line)
+}
+a, b := counts["abc"]	//返回map中对应key的value和bool值表示这个key是否存在
+
+for _, line := range lines //lines是字符串数组，返回位置和内容
+
+fmt.Printf 
+
+%d int变量
+%x, %o, %b 分别为16进制，8进制，2进制形式的int
+%f, %g, %e 浮点数： 3.141593 3.141592653589793 3.141593e+00
+%t 布尔变量：true 或 false
+%c rune (Unicode码点)，Go语言里特有的Unicode字符类型
+%s string
+%q 带双引号的字符串 "abc" 或 带单引号的 rune 'c'
+%v 会将任意变量以易读的形式打印出来
+%T 打印变量的类型
+%% 字符型百分比标志（%符号本身，没有其他操作）
+
+
+map作为参数传递无法直接访问map中结构体的内部
+可以用临时变量取值，修改以后再赋值回去
+
+
+字符串和数值之间的转换也比较常见。由strconv包提供这类转换功能。
+FormatInt和FormatUint函数可以用不同的进制来格式化数字。
+如果要将一个字符串解析为整数，可以使用strconv包的Atoi或ParseInt函数，还有用于解析无符号整数的ParseUint函数。
+有时候也会使用fmt.Scanf来解析输入的字符串和数字，特别是当字符串和数字混合在一行的时候，它可以灵活处理不完整或不规则的输入。
+
+
+iota
+在一个const声明语句中，在第一个声明的常量所在的行，iota将会被置为0，然后在每一个有常量声明的行加一
+
+数组
+如果在数组的长度位置出现的是“...”省略号，则表示数组的长度是根据初始化值的个数来计算
+
+s := []int{1, 2, 3, 4, 5} 		//底层创建数组，返回切片
+s := [...]int{1, 2, 3, 4, 5}	//创建数组
+
+和数组不同的是，slice之间不能比较，因此我们不能使用==操作符来判断两个slice是否含有全部相等元素。
+如果你需要测试一个slice是否是空的，使用len(s) == 0来判断，而不应该用s == nil来判断。
