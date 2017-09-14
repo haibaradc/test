@@ -2,6 +2,150 @@
 var a int = 10
 
 var a int
+a = 10 //全局变量报错
+
+const c int = 5
+
+const (
+	c1 = 6
+	c2 = 7
+)
+
+局部变量：
+a := 10
+
+定义数组：
+var arr [5]int //[5]int是go中的类型
+var arr = [5]int{1,2,3,4,5}
+arr := [5]int{1,2,3,4,5}
+
+go定义变量的规则:
+var 名字 类型 = 值
+var 名字 = 类型值
+eg：
+var a = int(10)  //int可以省略 ， int是类型
+var a = [5]int{1,2,3,4,5}	//[5]int是go中的类型
+名字 := 值
+
+自己的理解：
+[5]int{1,2,3,4,5}	//这个整体叫做1,2,3,4,5的int型数组
+把它赋值给arr，所以arr就是个int数组
+
+slice（切片）
+s1 := []int{1,2,3,4} 不带个数
+s := s1[1:2]	//从1开始，到2结束(不包括2)
+
+对于 slice 有几个有用的内置函数：
+len 获取 slice 的长度
+cap 获取 slice 的最大容量
+append 向 slice 里面追加一个或者多个元素，然后返回一个和 slice 一样类型的 slice
+copy 函数 copy 从源 slice 的 src 中复制元素到目标 dst ，并且返回复制的元素的个数
+
+
+map
+定义
+var m1 map[string]int
+m1 = make(map[string]int)
+m1["first"] = 1
+或者
+m1 := make(map[string]int)
+m1["first"] = 1
+上两种需要make
+这种不需要
+rating := map[string]float32 {"C":5, "Go":4.5, "Python":4.5, "C++":2 }
+
+if
+if integer == 3 {
+fmt.Println("The integer is equal to 3")
+} else if integer < 3 {
+fmt.Println("The integer is less than 3")
+} else {
+fmt.Println("The integer is greater than 3")
+}
+
+if a:= 10;b<100{
+	xxxx
+}
+
+for
+for index := 10; index>0; index-- {
+｝
+
+for sum < 1000 {
+｝
+
+range
+for k,v:=range map {
+	fmt.Println("map's key:",k)
+	fmt.Println("map's val:",v)
+}
+
+
+switch i {
+case 1:
+	fmt.Println("1")
+case 2, 3, 4:
+	fmt.Println("2,3,4")
+	fallthrough
+case 10:
+	fmt.Println("10")
+default:
+	fmt.Println("default")
+}
+
+可以使用 fallthrough 强制执行后面的case代码
+
+
+函数：
+
+func func2(i int) (int, int) {
+	return 1, 2
+}
+
+func someone_say(who string, s string) {
+	defer fmt.Println("1")	//后执行
+	defer fmt.Println("2")	//先执行
+	fmt.Println(who, " say: ", s)
+}
+
+defer 语句会在函数返回前执行
+
+type testInt func(int) bool //  声明了一个函数类型
+func(int) bool 形式的函数可以作为参数使用
+
+func func1(a int) bool{
+	xxxx
+}
+
+var f testInt = func1
+
+f()
+
+
+在下面的代码中，第一个语句声明了in和err两个变量。在第二个语句只声明了out一个变量，然后对已
+经声明的err进行了赋值操作。
+in, err := os.Open(infile)
+// ...
+out, err := os.Create(outfile)
+简短变量声明语句中必须至少要声明一个新的变量
+
+
+os.Args()	//命令行参数，带arg0
+flag.Args()	//命令行参数，不带arg0
+
+new
+p := new(int) // p, *int 类型
+
+自增和自减是语句，而不是表达式，因此x = i++之类的表达式是错误的
+
+我们可以用下划线空白标识符_来丢弃不需要的值
+
+
+
+定义变量：
+var a int = 10
+
+var a int
 a = 10 //报错
 
 const c int = 5
@@ -99,3 +243,4 @@ s := [...]int{1, 2, 3, 4, 5}	//创建数组
 
 和数组不同的是，slice之间不能比较，因此我们不能使用==操作符来判断两个slice是否含有全部相等元素。
 如果你需要测试一个slice是否是空的，使用len(s) == 0来判断，而不应该用s == nil来判断。
+
