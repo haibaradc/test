@@ -24,4 +24,11 @@ func main() {
 	fmt.Println(list2)
 	fmt.Println(len(list2))
 	fmt.Println(cap(list2))
+	list2 = append(list2, 9)
+	fmt.Println(list2)
+
+	var list3 []int
+	//list3 = make([]int, 1)
+	list3 = append(list3, 5)
+	fmt.Println(list3)
 }
