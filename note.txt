@@ -244,3 +244,25 @@ s := [...]int{1, 2, 3, 4, 5}	//创建数组
 和数组不同的是，slice之间不能比较，因此我们不能使用==操作符来判断两个slice是否含有全部相等元素。
 如果你需要测试一个slice是否是空的，使用len(s) == 0来判断，而不应该用s == nil来判断。
 
+io包保证任何由文件结束引起的读取失败都返回同一个错误——io.EOF
+
+函数作为参数
+func negative(a int) int {
+	return -a
+}
+
+func negative2(a int, f func(a int) int) int {
+	return f(a)
+}
+
+f1 := negative2
+fmt.Println(f1(5, negative))
+
+/////////////////////////////
+
+func (p Point) Distance(q Point) float64 {
+	return math.Hypot(p.X-q.X, p.Y-q.Y)
+}
+上面的代码里那个附加的参数p，叫做方法的接收器(receiver)，早期的面向对象语言留下的遗产将调用
+一个方法称为“向一个对象发送消息”。
+
